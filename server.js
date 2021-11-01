@@ -1,9 +1,41 @@
 const express = require("express");
 const path = require("path");
+const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+
 var app = express();
+
+// DB Config
+const db = require('./config/keys').MongoURI;
+
+// Connect to Mongo
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true ,useUnifiedTopology: true}
+  )
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
+
+
+//EJS
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
+
+// Bodyparser
+app.use(express.urlencoded({ extended: false }));
+
+
 var server = app.listen(process.env.PORT || 3000, function () {
   console.log("Listening on port 3000");
 });
+
+//routes
+//app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+
+
+
 const fs = require("fs");
 const fileUpload = require("express-fileupload");
 const io = require("socket.io")(server, {

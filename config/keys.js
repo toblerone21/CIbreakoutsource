@@ -1,5 +1,5 @@
 /*module.exports = {
-    mongoURI: 'mongodb+srv://Breakout:JyJWAFVfjFXnDB1f@cibreakout.2kxfc.mongodb.net/Authenticate?retryWrites=true&w=majority'
+    mongoURI: 'mongodb+srv://Breakout:<password>@cibreakout.2kxfc.mongodb.net/Authenticate?retryWrites=true&w=majority'
 }*/
 
 

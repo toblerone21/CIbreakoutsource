@@ -2,11 +2,13 @@ const express = require("express");
 const path = require("path");
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 var app = express();
 
 // DB Config
-const db = require('./config/keys').MongoURI;
+const db = require('./config/keys').mongoURI;
 
 // Connect to Mongo
 mongoose
@@ -25,6 +27,24 @@ app.set('view engine', 'ejs');
 // Bodyparser
 app.use(express.urlencoded({ extended: false }));
 
+// Express Session
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// Connect Flash
+app.use(flash());
+
+// Global Vars
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
 
 var server = app.listen(process.env.PORT || 3000, function () {
   console.log("Listening on port 3000");

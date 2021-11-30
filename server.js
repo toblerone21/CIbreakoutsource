@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const User = require("./models/User")
 
 
 var app = express();
@@ -63,6 +64,11 @@ var server = app.listen(process.env.PORT || 3000, function () {
 //routes
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
+
+//Attempt var
+
+
+
 
 
 

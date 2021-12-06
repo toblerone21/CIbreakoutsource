@@ -10,6 +10,9 @@ const User = require("./models/User")
 
 var app = express();
 
+//Static
+app.use(express.static('../', {index: 'action.html'}))
+
 // passport config
 require('./config/passport')(passport);
 
